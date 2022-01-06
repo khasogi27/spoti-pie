@@ -1,16 +1,15 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head';
+import Login from './login';
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <div className='flex flex-col items-center justify-center min-h-screen'>
       <Head>
-        <h1 className="text-3xl font-bold">
-          spotipie
-        </h1>
+        <title>Spotipie</title>
       </Head>
+      
+      <Login></Login>
     </div>
   )
 }
