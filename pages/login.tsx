@@ -1,6 +1,7 @@
+import { signIn } from "next-auth/react";
 import Head from "next/head";
 
-const Login: any = () => {
+const Login = () => {
   return (
     <div className='flex flex-col items-center justify-center min-h-screen w-screen bg-black'>
       <Head>
@@ -12,7 +13,9 @@ const Login: any = () => {
           Spotipie
         </h1>
 
-        <button className ='py-4 px-6 mt-12 font-bold uppercase text-x bg-green-500 text-white rounded-full'>Login with spotipie</button>
+        <button onClick={() => signIn()} className='py-4 px-12 mt-12 font-bold uppercase text-x bg-green-500 text-white rounded-full hover:scale-105 hover:bg-green-500'>
+          Login
+        </button>
       </main>
     </div>
   )
