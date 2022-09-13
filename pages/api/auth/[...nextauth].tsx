@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth';
 import SpotifyProvider from 'next-auth/providers/spotify';
 
-const { SPOTIFY_CLIENT_ID: client_id, SPOTIFY_CLIENT_SECRET: client_secret, SPOTIFY_REFRESH_TOKEN: refresh_token } = process.env;
+const { SPOTIFY_CLIENT_ID: client_id, SPOTIFY_CLIENT_SECRET: client_secret, SPOTIFY_REFRESH_TOKEN: refresh_token, NEXTAUTH_URL: next_secret } = process.env;
 
 export default NextAuth({
   providers: [
@@ -12,12 +12,13 @@ export default NextAuth({
       clientSecret: client_secret as string,
     }),
   ],
+  secret: next_secret as string,
   callbacks: {
     async jwt({token, account}) {
       if (account) token.accessToken = account.refresh_token;
       return token;
     },
-    async session(session, user) {
+    async session(session: any, user: any) {
       session.user = user
       return session;
     },
