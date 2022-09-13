@@ -1,11 +1,19 @@
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
+import Logout from "../comp/Logout";
 
 const Login = () => {
+  const { data: session } = useSession();
+
+  if (session) {
+    return (
+      <Logout></Logout>
+    )
+  }
   return (
     <div className='flex flex-col items-center justify-center min-h-screen w-screen bg-black'>
       <Head>
-        <title>Spotipie</title>
+        <title>Spotipie - Login</title>
       </Head>
 
       <main className='flex flex-col items-center justify-center w-full flex-1'>
