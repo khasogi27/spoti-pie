@@ -1,5 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import NextAuth, { NextAuthOptions } from 'next-auth';
+import NextAuth from 'next-auth';
 import SpotifyProvider from 'next-auth/providers/spotify';
 
 const {
@@ -18,13 +17,15 @@ export default NextAuth({
       clientSecret: client_secret as string,
     }),
   ],
+  secret: next_secret as string,
   callbacks: {
     async jwt({token, account}) {
       if (account) token.accessToken = account.refresh_token;
       return token;
     },
-    async session(session: any, user: any) {
-      session.user = user
+    async session(session: any, user: string) {
+      session.user = user;
+      session.email = session.token.email;
       return session;
     },
   },
